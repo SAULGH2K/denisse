@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta Especial</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 0.5s;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        button#yes {
+            background-color: #4caf50;
+            color: white;
+            transform: scale(1);
+        }
+        button#no {
+            background-color: #f44336;
+            color: white;
+            transform: scale(1);
+        }
+        .hidden {
+            display: none;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+        .love-message {
+            margin-top: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #ff69b4; /* Rosa fuerte */
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            position: relative;
+        }
+        .love-message::before {
+            content: "🌸"; /* Añade una flor al inicio del mensaje */
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="cuteImage" src="data:image/jpeg;base64,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" alt="Imagen tierna">
+        <div class="question">¿ME PERDONAS?</div>
+        <div class="buttons">
+            <button id="yes" onclick="handleYes()">Sí</button>
+            <button id="no" onclick="handleNo()">No</button>
+        </div>
+        <div id="message" class="hidden">
+            Te amo mucho Denisse, no me gusta estar así contigo, te veo en la tarde en la casa para comer y estar juntos, enserio no sabes cuanto te amo
+        </div>
+        <div id="loveMessages" class="hidden"></div>
+    </div>
+    <script>
+        let yesScale = 1; // Escala inicial del botón 'Sí'
+        let noClicks = 0; // Contador de clics del botón 'No'
+        const maxNoClicks = 10; // Número máximo de clics permitidos en el botón 'No'
+
+        function handleYes() {
+            // Cambia la imagen
+            document.getElementById('cuteImage').src = 'https://img.freepik.com/fotos-premium/gatito-ramo-flores_902846-16492.jpg';
+            
+            // Muestra el mensaje y oculta los botones
+            document.getElementById('message').classList.remove('hidden');
+            document.querySelector('.buttons').classList.add('hidden');
+        }
+
+        function handleNo() {
+            if (noClicks < maxNoClicks) {
+                noClicks++; // Incrementa el contador de clics del botón 'No'
+                yesScale += 0.1; // Aumenta la escala del botón 'Sí' en 0.1
+                document.getElementById('yes').style.transform = `scale(${yesScale})`;
+                document.getElementById('no').style.transform = 'scale(0.8)';
+
+                // Muestra el mensaje "Te amo mucho" en un fondo rosa con una flor
+                const loveMessage = document.createElement('div');
+                loveMessage.className = 'love-message';
+                loveMessage.textContent = 'Te amo mucho';
+                document.getElementById('loveMessages').appendChild(loveMessage);
+                document.getElementById('loveMessages').classList.remove('hidden');
+            }
+
+            // Si se alcanza el límite, oculta el botón 'No' y solo muestra el botón 'Sí'
+            if (noClicks >= maxNoClicks) {
+                document.getElementById('no').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
